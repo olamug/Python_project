@@ -97,6 +97,7 @@ stomach = []
 welcome_display()
 players_name = input("What's your name? \n")
 
+
 while True:
     wn.update()
 
@@ -139,6 +140,7 @@ while True:
             for body in stomach:
                 body.hideturtle()
             stomach.clear()
+            joe.hideturtle()
             game_over_display()
             score = 0
 
