@@ -13,6 +13,6 @@ def welcome_display():
     welcome.goto(0, 0)
     welcome.write(f'              Welcome to snake 1.0! '
                   f'\nCollect all items and become a master. '
-                  f'\n     Press Space Bar to exit the game.', align="center", font=("System", 14, "normal"))
+                  f'\n         Press x to exit the game.', align="center", font=("System", 14, "normal"))
     time.sleep(2.5)
     welcome.clear()

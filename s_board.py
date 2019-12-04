@@ -27,5 +27,6 @@ def ending_score_board(name, high_score):
     time.sleep(1.5)
 
 
+
 if __name__ == '__main__':
     score_board_display()

@@ -27,9 +27,13 @@ def move():
         joe.setx(x+10)
         if joe.xcor() == 250:
             joe.setx(-250)
-    if high_score > 0 and joe.direction == 'stop':
-        ending_score_board(players_name, high_score)
-        exit()
+    if joe.direction == 'stop':
+        joe.direction = 'stop'
+        for body in stomach:
+            body.direction = 'stop'
+    if joe.pos == (666, 666):
+        game_over_display()
+
 
 
 def go_up():
@@ -54,6 +58,13 @@ def go_right():
 
 def stop():
     joe.direction = 'stop'
+
+
+def end_of_game():
+    joe.setpos(666, 666)
+    game_over_display()
+    ending_score_board(players_name, high_score)
+    exit()
 
 
 # stworzenie okna i jego cech
@@ -88,8 +99,10 @@ wn.onkeypress(go_down, "Down")
 wn.onkeypress(go_left, "Left")
 wn.onkeypress(go_right, "Right")
 wn.onkeypress(stop, " ")
+wn.onkeypress(end_of_game, "x")
 
-delay = 0.07
+
+delay = 0.05
 score = 0
 high_score = 0
 stomach = []
@@ -100,7 +113,6 @@ players_name = input("What's your name? \n")
 
 while True:
     wn.update()
-
     score_board_display(players_name, score, high_score)
 
     # zmiana miejsca jedzenia
@@ -119,6 +131,7 @@ while True:
         score += 10
         if score > high_score:
             high_score = score
+        delay -= 0.0005
 
     for index in range(len(stomach) - 1, 0, -1):
         x = stomach[index - 1].xcor()
@@ -140,10 +153,9 @@ while True:
             for body in stomach:
                 body.hideturtle()
             stomach.clear()
-            joe.hideturtle()
             game_over_display()
             score = 0
-
+    time.sleep(0.01)
     time.sleep(delay)
 
 
