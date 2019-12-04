@@ -1,7 +1,7 @@
 import turtle
 import time
 import random
-
+from go_display import game_over_display
 
 def move():
     if joe.direction == 'up':
@@ -83,7 +83,7 @@ wn.onkeypress(go_left, "Left")
 wn.onkeypress(go_right, "Right")
 wn.onkeypress(stop, " ")
 
-delay = 0.1
+delay = 0.07
 score = 0
 stomach = []
 
@@ -114,19 +114,18 @@ while True:
         y = joe.ycor()
         stomach[0].goto(x, y)
 
-
     move()  # po każdym update uruchamiamy funkcję
 
     for body in stomach:
         if joe.pos() == body.pos():
             time.sleep(0.5)
-            joe.goto(0, 0)
             stop()
-            stomach.clear()
+            joe.goto(0, 0)
             for body in stomach:
-                body.goto(1000, 1000)
+                body.hideturtle()
+            stomach.clear()
+            game_over_display()
 
-
-    time.sleep(0.05)
+    time.sleep(delay)
 
 
