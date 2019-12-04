@@ -5,15 +5,15 @@ import random
 
 def game_over_display():
     tekst = 'GAME OVER'
-    display = turtle.Turtle()
-    display.hideturtle()
-    display.speed(0)
+    go_display = turtle.Turtle()
+    go_display.hideturtle()
+    go_display.speed(0)
     colors = ["DodgerBlue", "Aquamarine", "SpringGreen", "GreenYellow", "Fuchsia", "DeepSkyBlue"]
     for e in range(5):
-        display.color(random.choice(colors))
-        display.write(tekst, align='center', font=("Arial", 25, "bold"))
+        go_display.color(random.choice(colors))
+        go_display.write(tekst, align='center', font=("System", 25, "normal"))
         time.sleep(0.5)
-    display.clear()
+    go_display.clear()
 
 
 if __name__ == '__main__':

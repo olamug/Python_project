@@ -2,6 +2,9 @@ import turtle
 import time
 import random
 from go_display import game_over_display
+from s_board import score_board_display, ending_score_board
+from welcome import welcome_display
+
 
 def move():
     if joe.direction == 'up':
@@ -24,6 +27,9 @@ def move():
         joe.setx(x+10)
         if joe.xcor() == 250:
             joe.setx(-250)
+    if high_score > 0 and joe.direction == 'stop':
+        ending_score_board(players_name, high_score)
+        exit()
 
 
 def go_up():
@@ -60,7 +66,7 @@ wn.tracer(0)
 # stworzenie głowy węża - Joe
 joe = turtle.Turtle()
 joe.speed(0)  # na razie nie potrzebuje się poruszać
-joe.shape("turtle")
+joe.shape("square")
 joe.color("black")
 joe.penup()  # podnosimy ołówek, żeby nie zostawiać śladu po głowie
 joe.goto(0, 0)  # ustawiamy joe na pozycji zerowej
@@ -85,10 +91,16 @@ wn.onkeypress(stop, " ")
 
 delay = 0.07
 score = 0
+high_score = 0
 stomach = []
+
+welcome_display()
+players_name = input("What's your name? \n")
 
 while True:
     wn.update()
+
+    score_board_display(players_name, score, high_score)
 
     # zmiana miejsca jedzenia
     if joe.pos() == food.pos():
@@ -103,6 +115,9 @@ while True:
         body.color('grey')
         body.penup()
         stomach.append(body)
+        score += 10
+        if score > high_score:
+            high_score = score
 
     for index in range(len(stomach) - 1, 0, -1):
         x = stomach[index - 1].xcor()
@@ -125,6 +140,7 @@ while True:
                 body.hideturtle()
             stomach.clear()
             game_over_display()
+            score = 0
 
     time.sleep(delay)
 
